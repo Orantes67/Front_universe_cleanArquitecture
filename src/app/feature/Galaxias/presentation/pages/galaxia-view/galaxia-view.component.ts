@@ -11,7 +11,7 @@ import { GalaxiasDTO } from '../../../data/models/galaxias.models.dto';
   
   
 export class GalaxiaViewComponent implements OnInit {
-  galaxias: Galaxias[] = [];
+  galaxias: GalaxiasDTO[] = [];
   editMode = false;
   currentGalaxiaId: number | null = null;
   error: string | null = null;

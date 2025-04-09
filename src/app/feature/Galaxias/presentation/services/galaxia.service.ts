@@ -5,6 +5,7 @@ import { CreateGalaxiasUseCase } from '../../domain/use-cases/create-galaxias.us
 import { DeleteGalaxiasUseCase } from '../../domain/use-cases/delete-galaxias.use-case';
 import { ListGalaxiasUseCase } from '../../domain/use-cases/list-galaxias-.use-case';
 import { UpdateGalaxiasUseCase } from '../../domain/use-cases/update-galaxias.use-case';
+import { GalaxiasDTO } from '../../data/models/galaxias.models.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -78,24 +79,22 @@ export class GalaxiaService {
       this.errorSubject.next('Fields cannot be empty');
     }
   }
-  private galaxiasSubject = new BehaviorSubject<Galaxias[]>([]);
-  galaxias$ = this.galaxiasSubject.asObservable();
+  private galaxiasSubject = new BehaviorSubject<GalaxiasDTO[]>([]);
+galaxias$ = this.galaxiasSubject.asObservable();
 
-  async listGalaxias(): Promise<void> {
-    try {
-      const galaxias = await this.listGalaxiasUseCase.getAll();
-      if (galaxias) {
-        const mapped = galaxias.map(g => new Galaxias(g.name, g.numero_planetas, g.cordenadas));
-        this.galaxiasSubject.next(mapped);
-      } else {
-        this.errorSubject.next('No se pudieron cargar las galaxias');
-      }
-    } catch (error) {
-      console.error('Error al listar galaxias:', error);
-      this.errorSubject.next('Error al listar galaxias');
+async listGalaxias(): Promise<void> {
+  try {
+    const galaxias = await this.listGalaxiasUseCase.getAll();
+    if (galaxias) {
+      this.galaxiasSubject.next(galaxias); // Use the DTOs directly
+    } else {
+      this.errorSubject.next('No se pudieron cargar las galaxias');
     }
+  } catch (error) {
+    console.error('Error al listar galaxias:', error);
+    this.errorSubject.next('Error al listar galaxias');
   }
-
+}
   async deleteGalaxia(id: number): Promise<void> {
     try {
       const deleted = await this.deleteGalaxiasUseCase.delete(id);
