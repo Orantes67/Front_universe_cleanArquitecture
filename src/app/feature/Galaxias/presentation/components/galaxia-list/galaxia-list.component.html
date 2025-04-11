@@ -1,52 +1,52 @@
-
-<div class="bg-gray-800 rounded-lg shadow-lg p-6">
-    <h2 class="text-2xl font-semibold mb-6 text-blue-400">Galaxias Registradas</h2>
-    
-    <div *ngIf="galaxias.length === 0" class="text-center py-8 text-gray-400">
-      No hay galaxias registradas. ¡Agrega una nueva!
-    </div>
-    
-    <div class="overflow-x-auto">
-      <table *ngIf="galaxias.length > 0" class="mx-auto">
-        <thead>
-          <tr class="border-b border-gray-700">
-            <th class="px-4 py-3 text-left text-purple-300">Nombre</th>
-            <th class="px-4 py-3 text-left text-purple-300">Planetas</th>
-            <th class="px-4 py-3 text-left text-purple-300">Coordenadas</th>
-            <th class="px-4 py-3 text-right text-purple-300">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let galaxia of galaxias" class="border-b border-gray-700 hover:bg-gray-700">
-            <td class="px-4 py-3">{{ galaxia.name }}</td>
-            <td class="px-4 py-3">{{ galaxia.numero_planetas }}</td>
-            <td class="px-4 py-3">{{ galaxia.cordenadas }}</td>
-            <td class="px-4 py-3 text-right">
+<div class="bg-gray-800 rounded-lg shadow-lg p-8">
+  <h2 class="text-2xl font-semibold mb-8 text-blue-400 text-center">Galaxias Registradas</h2>
+  
+  <div *ngIf="galaxias.length === 0" class="text-center py-10 text-gray-400">
+    No hay galaxias registradas. ¡Agrega una nueva!
+  </div>
+  
+  <div class="overflow-x-auto">
+    <table *ngIf="galaxias.length > 0" class="w-full">
+      <thead>
+        <tr class="border-b border-gray-700">
+          <th class="px-6 py-4 text-left text-purple-300">Nombre</th>
+          <th class="px-6 py-4 text-center text-purple-300">Planetas</th>
+          <th class="px-6 py-4 text-left text-purple-300">Coordenadas</th>
+          <th class="px-6 py-4 text-center text-purple-300">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let galaxia of galaxias" class="border-b border-gray-700 hover:bg-gray-700">
+          <td class="px-6 py-4">{{ galaxia.name }}</td>
+          <td class="px-6 py-4 text-center">{{ galaxia.numero_planetas }}</td>
+          <td class="px-6 py-4">{{ galaxia.cordenadas }}</td>
+          <td class="px-6 py-4">
+            <div class="flex justify-center space-x-3">
               <button 
                 (click)="onEdit(galaxia)" 
-                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded shadow">
+                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded shadow">
                 Editar
               </button>
               <button 
                 (click)="onDelete(galaxia.id)" 
-                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow">
+                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow">
                 Eliminar
               </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-  
-    <div class="mt-6 text-center">
-      <button 
-        (click)="onRefresh()" 
-        class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded flex items-center mx-auto">
-        <span class="mr-2">Refrescar Lista</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-      </button>
-    </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  
+  <div class="mt-10 flex justify-center">
+    <button 
+      (click)="onRefresh()" 
+      class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded flex items-center">
+      <span class="mr-2">Refrescar Lista</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+    </button>
+  </div>
+</div>

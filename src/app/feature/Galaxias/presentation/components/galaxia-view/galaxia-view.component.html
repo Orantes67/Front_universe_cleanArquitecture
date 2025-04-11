@@ -1,30 +1,32 @@
-<div class="min-h-screen bg-gradient-to-b text-white p-6">
-  <div class="max-w-5xl mx-auto text-center space-y-16">
+<div class="min-h-screen bg-gradient-to-b  text-white p-6">
+  <div class="max-w-5xl mx-auto text-center space-y-12">
     
+  
     <header>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-purple-400 drop-shadow-lg mb-4">
-        🌌 Explorador de Galaxias
-      </h1>
-     
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-purple-400 drop-shadow-lg mb-2">🌌 Explorador de Galaxias</h1>
+  
     </header>
 
-    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8">
+    
+      
       <app-galaxia-form
         [editMode]="editMode"
         [galaxiaToEdit]="galaxiaToEdit"
         (formSubmit)="handleFormSubmit()"
         (cancelEdit)="exitEditMode()"
+        class="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8 mb-8"
       ></app-galaxia-form>
-    </div>
+  
 
-    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8">
+    
       <app-galaxia-list
         [galaxias]="galaxias"
         (editGalaxia)="handleEditGalaxia($event)"
         (deleteGalaxia)="handleDeleteGalaxia($event)"
         (refreshList)="loadGalaxias()"
+        class="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8"
       ></app-galaxia-list>
-    </div>
+    
 
   </div>
 </div>
