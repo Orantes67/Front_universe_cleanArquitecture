@@ -1,0 +1,66 @@
+
+<div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+    <h2 class="text-2xl font-semibold mb-4 text-blue-400">
+      {{ editMode ? 'Editar Galaxia' : 'Registrar Nueva Galaxia' }}
+    </h2>
+    
+    <!-- Error message -->
+    <div *ngIf="error" class="bg-red-500 bg-opacity-20 border border-red-500 text-red-100 px-4 py-3 rounded mb-4">
+      {{ error }}
+    </div>
+    
+    <!-- Form -->
+    <form (submit)="$event.preventDefault(); onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Name -->
+        <div class="mb-4">
+          <label class="block text-blue-300 mb-2">Nombre de la Galaxia</label>
+          <input 
+            type="text" 
+            [value]="galaxiaService.name"
+            (input)="galaxiaService.onChangeName($any($event.target).value)"
+            class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 focus:outline-none focus:border-blue-500"
+            placeholder="Ej: Vía Láctea">
+        </div>
+        
+        <!-- Number of planets -->
+        <div class="mb-4">
+          <label class="block text-blue-300 mb-2">Número de Planetas</label>
+          <input 
+            type="number" 
+            [value]="galaxiaService.numero_planetas"
+            (input)="galaxiaService.onChangeNumero_planetas(+$any($event.target).value)"
+            class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 focus:outline-none focus:border-blue-500"
+            placeholder="Ej: 100000">
+        </div>
+        
+        <!-- Coordinates -->
+        <div class="mb-4 md:col-span-2">
+          <label class="block text-blue-300 mb-2">Coordenadas</label>
+          <input 
+            type="text" 
+            [value]="galaxiaService.cordenadas"
+            (input)="galaxiaService.onChangeCordenadas($any($event.target).value)"
+            class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 focus:outline-none focus:border-blue-500"
+            placeholder="Ej: X:234.56, Y:789.01, Z:-123.45">
+        </div>
+      </div>
+      
+      <!-- Action buttons -->
+      <div class="flex gap-4 mt-6">
+        <button 
+          type="submit" 
+          class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition-colors duration-300">
+          {{ editMode ? 'Actualizar' : 'Registrar' }}
+        </button>
+        
+        <button 
+          *ngIf="editMode"
+          type="button"
+          (click)="onCancel()"
+          class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded transition-colors duration-300">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>

@@ -1,6 +1,6 @@
 
 export class Galaxias {
-    id?: number; // Add this property as optional
+    id?: number; 
     name: string;
     numero_planetas: number;
     cordenadas: string;

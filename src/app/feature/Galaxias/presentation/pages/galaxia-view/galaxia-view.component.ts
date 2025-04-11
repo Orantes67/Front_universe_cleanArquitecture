@@ -1,30 +1,23 @@
+// src/app/feature/Galaxias/presentation/pages/galaxia-view/galaxia-view.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Galaxias } from '../../../data/models/galaxias.models';
 import { GalaxiaService } from '../../services/galaxia.service';
 import { GalaxiasDTO } from '../../../data/models/galaxias.models.dto';
 
 @Component({
-    selector: 'app-galaxia-view',
-    templateUrl: '../../components/galaxia-view/galaxia-view.component.html',
-    styleUrls: ['./galaxia-view.component.css']
-  })
-  
-  
+  selector: 'app-galaxia-view',
+  templateUrl: '../../components/galaxia-view/galaxia-view.component.html',
+  styleUrls: ['./galaxia-view.component.css']
+})
 export class GalaxiaViewComponent implements OnInit {
   galaxias: GalaxiasDTO[] = [];
   editMode = false;
   currentGalaxiaId: number | null = null;
-  error: string | null = null;
+  galaxiaToEdit: GalaxiasDTO | null = null;
 
-  constructor(public galaxiaService: GalaxiaService) {}
+  constructor(private galaxiaService: GalaxiaService) {}
 
   ngOnInit(): void {
     this.loadGalaxias();
-    
-    // Subscribe to error messages
-    this.galaxiaService.error$.subscribe(error => {
-      this.error = error;
-    });
     
     // Subscribe to galaxias list updates
     this.galaxiaService.galaxias$.subscribe(galaxias => {
@@ -36,7 +29,7 @@ export class GalaxiaViewComponent implements OnInit {
     this.galaxiaService.listGalaxias();
   }
 
-  onSubmit(): void {
+  handleFormSubmit(): void {
     if (this.editMode && this.currentGalaxiaId !== null) {
       this.galaxiaService.updateGalaxia(this.currentGalaxiaId);
       this.exitEditMode();
@@ -45,25 +38,20 @@ export class GalaxiaViewComponent implements OnInit {
     }
   }
 
-  onDelete(id: number): void {
-    if (confirm('¿Estás seguro de que deseas eliminar esta galaxia?')) {
-      this.galaxiaService.deleteGalaxia(id);
-    }
+  handleDeleteGalaxia(id: number): void {
+    this.galaxiaService.deleteGalaxia(id);
   }
 
-  onEdit(galaxia: GalaxiasDTO): void {
+  handleEditGalaxia(galaxia: GalaxiasDTO): void {
     this.editMode = true;
     this.currentGalaxiaId = galaxia.id;
-  
-    this.galaxiaService.onChangeName(galaxia.name);
-    this.galaxiaService.onChangeNumero_planetas(galaxia.numero_planetas);
-    this.galaxiaService.onChangeCordenadas(galaxia.cordenadas);
+    this.galaxiaToEdit = galaxia;
   }
-  
 
   exitEditMode(): void {
     this.editMode = false;
     this.currentGalaxiaId = null;
+    this.galaxiaToEdit = null;
     this.galaxiaService.resetForm();
   }
 }

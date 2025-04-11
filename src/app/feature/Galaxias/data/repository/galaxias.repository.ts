@@ -6,7 +6,7 @@ import { environment } from '../../../../../assets/enviroments/environment';
 export class GalaxiasRepository {
 
     async create(galaxias: Galaxias): Promise<GalaxiasDTO | null> {
-        const response = await fetch(`${environment.apiUrl}/Galaxia`, {
+        const response = await fetch(`${environment.apiUrl}/Galaxia/`, {
             method: 'POST',
             body: JSON.stringify({
                 name: galaxias.name,
@@ -25,7 +25,7 @@ export class GalaxiasRepository {
     }
 
     async getall(): Promise<GalaxiasDTO[] | null> {
-        const response = await fetch(`${environment.apiUrl}/Galaxia`, {
+        const response = await fetch(`${environment.apiUrl}/Galaxia/`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
