@@ -95,20 +95,27 @@ async listGalaxias(): Promise<void> {
     this.errorSubject.next('Error al listar galaxias');
   }
 }
-  async deleteGalaxia(id: number): Promise<void> {
-    try {
-      const deleted = await this.deleteGalaxiasUseCase.delete(id);
-      if (deleted) {
-        console.log(`Galaxia con id ${id} eliminada`);
-        this.listGalaxias(); // Refrescar la lista
-      } else {
-        this.errorSubject.next('Error al eliminar galaxia');
-      }
-    } catch (error) {
-      console.error('Error al eliminar galaxia:', error);
+async deleteGalaxia(id: number): Promise<void> {
+  try {
+    const deleted = await this.deleteGalaxiasUseCase.delete(id);
+    if (deleted) {
+      console.log(`Galaxia con id ${id} eliminada`);
+      
+      // Update the local list to reflect deletion immediately
+      const currentGalaxias = this.galaxiasSubject.value;
+      const updatedGalaxias = currentGalaxias.filter(g => g.id !== id);
+      this.galaxiasSubject.next(updatedGalaxias);
+      
+      // Then refresh from the server
+      this.listGalaxias();
+    } else {
       this.errorSubject.next('Error al eliminar galaxia');
     }
+  } catch (error) {
+    console.error('Error al eliminar galaxia:', error);
+    this.errorSubject.next('Error al eliminar galaxia');
   }
+}
 
   async updateGalaxia(id: number): Promise<void> {
     this.errorSubject.next(null);

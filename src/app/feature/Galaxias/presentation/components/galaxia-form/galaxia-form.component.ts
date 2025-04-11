@@ -27,11 +27,17 @@ export class GalaxiaFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-  
+    // Clear previous values when entering edit mode
     if (changes['galaxiaToEdit'] && this.galaxiaToEdit) {
-      this.galaxiaService.onChangeName(this.galaxiaToEdit.name);
-      this.galaxiaService.onChangeNumero_planetas(this.galaxiaToEdit.numero_planetas);
-      this.galaxiaService.onChangeCordenadas(this.galaxiaToEdit.cordenadas);
+      // Reset form first to clear previous values
+      this.galaxiaService.resetForm();
+      
+      // Set the new values after a brief delay to ensure DOM updates
+      setTimeout(() => {
+        this.galaxiaService.onChangeName(this.galaxiaToEdit?.name || '');
+        this.galaxiaService.onChangeNumero_planetas(this.galaxiaToEdit?.numero_planetas || 0);
+        this.galaxiaService.onChangeCordenadas(this.galaxiaToEdit?.cordenadas || '');
+      }, 0);
     }
   }
 
