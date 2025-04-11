@@ -1,27 +1,30 @@
-<!-- src/app/feature/Galaxias/presentation/pages/galaxia-view/galaxia-view.component.html -->
-<div class="min-h-screen bg-gray-900 text-white p-6">
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <header class="mb-10">
-      <h1 class="text-4xl font-bold text-center text-purple-400">Explorador de Galaxias</h1>
-      <p class="text-center text-gray-300 mt-2">Gestiona la información de las galaxias conocidas</p>
+<div class="min-h-screen bg-gradient-to-b text-white p-6">
+  <div class="max-w-5xl mx-auto text-center space-y-16">
+    
+    <header>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-purple-400 drop-shadow-lg mb-4">
+        🌌 Explorador de Galaxias
+      </h1>
+     
     </header>
-    
-    <!-- Form Component -->
-    <app-galaxia-form
-      [editMode]="editMode"
-      [galaxiaToEdit]="galaxiaToEdit"
-      (formSubmit)="handleFormSubmit()"
-      (cancelEdit)="exitEditMode()"
-    ></app-galaxia-form>
-    
-    <!-- List Component -->
-    <app-galaxia-list
-      [galaxias]="galaxias"
-      (editGalaxia)="handleEditGalaxia($event)"
-      (deleteGalaxia)="handleDeleteGalaxia($event)"
-      (refreshList)="loadGalaxias()"
-    ></app-galaxia-list>
-    
+
+    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8">
+      <app-galaxia-form
+        [editMode]="editMode"
+        [galaxiaToEdit]="galaxiaToEdit"
+        (formSubmit)="handleFormSubmit()"
+        (cancelEdit)="exitEditMode()"
+      ></app-galaxia-form>
+    </div>
+
+    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8">
+      <app-galaxia-list
+        [galaxias]="galaxias"
+        (editGalaxia)="handleEditGalaxia($event)"
+        (deleteGalaxia)="handleDeleteGalaxia($event)"
+        (refreshList)="loadGalaxias()"
+      ></app-galaxia-list>
+    </div>
+
   </div>
 </div>

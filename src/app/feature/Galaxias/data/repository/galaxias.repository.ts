@@ -5,7 +5,7 @@ import { environment } from '../../../../../assets/enviroments/environment';
 export class GalaxiasRepository {
 
     async create(galaxias: Galaxias): Promise<GalaxiasDTO | null> {
-        // Updated to use the expected field names
+       
         const response = await fetch(`${environment.apiUrl}/Galaxia/`, {
             method: 'POST',
             body: JSON.stringify({

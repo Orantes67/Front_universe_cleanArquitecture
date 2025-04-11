@@ -7,7 +7,7 @@
     </div>
     
     <div class="overflow-x-auto">
-      <table *ngIf="galaxias.length > 0" class="w-full">
+      <table *ngIf="galaxias.length > 0" class="mx-auto">
         <thead>
           <tr class="border-b border-gray-700">
             <th class="px-4 py-3 text-left text-purple-300">Nombre</th>
@@ -24,12 +24,12 @@
             <td class="px-4 py-3 text-right">
               <button 
                 (click)="onEdit(galaxia)" 
-                class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md text-sm mr-2">
+                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded shadow">
                 Editar
               </button>
               <button 
                 (click)="onDelete(galaxia.id)" 
-                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm">
+                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow">
                 Eliminar
               </button>
             </td>
@@ -38,7 +38,7 @@
       </table>
     </div>
     
-    <!-- Refresh button -->
+  
     <div class="mt-6 text-center">
       <button 
         (click)="onRefresh()" 
